@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\siswa;
 
 class HomeController extends Controller
 {
@@ -23,7 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $users = User::with(['roles' => function ($query) {
+        //     $query->where('name', 'admin');
+        // }])->get();
+        // $siswa = siswa::all();
+
+        // return view('index')->with('siswa', $siswa);
+        return view('home');
         
-        return view('index');
     }
 }

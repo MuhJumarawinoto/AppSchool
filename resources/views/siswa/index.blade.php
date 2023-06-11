@@ -162,7 +162,33 @@
                     <th scope="col">Aksi</th>
                   </tr>
                 </thead>
-                
+                <tbody>
+                @php
+                    $index = 1;
+                @endphp
+
+                @foreach($siswa as $a)
+                    <tr>
+                        <th scope="row"><a href="#">{{ $index }}</a></th>
+                        <td>{{ $a->nama }}</td>
+                        <td>{{ $a->jenis_kelamin }}</td>
+                        <td>{{ $a->tanggal_lahir }}</td>
+                        <td>{{ $a->alamat }}</td>
+                        <td>{{ $a->telepon }}</td>
+                        <td>{{ $a->email }}</td>
+                        <td>{{ $a->kelas }}</td>
+                        <td>{{ $a->jurusan }}</td>
+                        <td><button type="button" class="btn btn-info" title="Lihat {{$a->nama}} bio"><i class="fa-solid fa-eye"></i></button></td>
+                        <td><button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio"><a href="{{route('siswa.create')}}"><i class="fa-regular fa-pen-to-square" ></i></a></button></td>
+                        <td><button type="button" class="btn btn-danger" title="hapus {{$a->nama}} bio"><a href="{{route('siswa.create')}}"><i class="fa-solid fa-trash" ></i></a></button></td>
+                        
+                        
+                    </tr>
+                    @php
+                        $index++;
+                    @endphp
+                @endforeach
+                </tbody>
               </table>
 
             </div>

@@ -22,8 +22,11 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/e18a8b7bd9.js" crossorigin="anonymous"></script>
+  <!-- <script src="assets/js/e18a8b7bd9.js" ></script>   -->
 
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/all.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
@@ -232,8 +235,8 @@
           <!-- End Profile Iamge Icon -->
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>{{ Auth::user()->name;}}</h6>
-              <span>Web Designer</span>
+              <h6>{{ Auth::user()->name}}</h6>
+              <span>{{ Auth::user()->role->nama}} </span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -269,10 +272,14 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <form action="{{route('logout')}}" method="POST" id="logout-form">
+                @csrf
+            <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
+            </form>
             </li>
 
           </ul><!-- End Profile Dropdown Items -->

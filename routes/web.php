@@ -18,16 +18,14 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
-Auth::routes();
 
+Auth::routes();
+// route dashboard
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'] );
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'] )->name('home');
-Route::get('/test', function(){
-    return view('welcome');
-});
-Route::group(['middleware' => 'auth'], function () {
-    // Route yang memerlukan autentikasi di sini
-    Route::get('/', function () {
-        
-        return view('index');
-    });
-});
+
+// route siswa
+Route::get('/siswa', [App\Http\Controllers\SiswaController::class, 'index'] )->name('siswa');
+Route::get('/siswa/create', [App\Http\Controllers\SiswaController::class, 'create'] )->name('siswa.create');
+
+
