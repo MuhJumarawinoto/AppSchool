@@ -1,187 +1,125 @@
-@include('layouts.navbar')
-@include('layouts.sidebar')
+@extends('layouts.master')
 
-<main id="main" class="main">
+@section('title','Tambah Siswa')
 
-<div class="pagetitle">
-  <h1>Dashboard</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
-  </nav>
-</div><!-- End Page Title -->
+@section('content')
 
-<section class="section dashboard">
-  <div class="row">
-
-    <!-- Left side columns -->
-    <div class="col-lg-12">
-      <div class="row">
-
-        <!-- Sales Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card sales-card">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
+<div class="card">
             <div class="card-body">
-              <h5 class="card-title">Sales <span>| Today</span></h5>
+              <h5 class="card-title">Form Input Siswa</h5>
 
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-cart"></i>
+              <!-- Horizontal Form -->
+              <form action="{{route('siswa.storage')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <hr>
+              <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
+                  <div class="col-sm-3">
+                    <select id="inputState" name="kelas" class="form-select">
+                        <option selected>Pilih...</option>
+                        <option>I</option>
+                        <option>II</option>
+                        <option>III</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-1">
+                    <label for="inputEmail3" class="col-sm-12 col-form-label">Jurusan</label>
+                  </div>
+                  <div class="col-md-3">
+                  <select id="inputState" name="jurusan" class="form-select">
+                        <option selected>Pilih...</option>
+                        <option>IPA</option>
+                        <option>IPS</option>
+                        <option>Ekonomi</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="ps-3">
-                  <h6>145</h6>
-                  <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
+                <hr>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">nama</label>
+                  <div class="col-sm-6">
+                    <input type="text" name="nama" class="form-control" id="inputText" placeholder="Masukan Nama siswa Baru ..">
+                  </div>
                 </div>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- End Sales Card -->
-
-        <!-- Revenue Card -->
-        <div class="col-xxl-4 col-md-6">
-          <div class="card info-card revenue-card">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-currency-dollar"></i>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Pass Foto</label>
+                  <div class="col-sm-3">
+                    <input class="form-control" name="foto" type="file" id="formFile">
+                  </div>
                 </div>
-                <div class="ps-3">
-                  <h6>$3,264</h6>
-                  <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
+                <div class="row mb-3">
+                  <label for="inputEmail3" name="jenis_kelamin"class="col-sm-2 col-form-label">jenis Kelamin</label>
+                  <div class="col-sm-2">
+                  <select id="inputState"  name="jenis_kelamin" nameclass="form-select">
+                    <option selected>Pilih...</option>
+                    <option value="L">Laki-Laki</option>
+                    <option value="P">Perempuan</option>
+                  </select>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- End Revenue Card -->
-
-        <!-- Customers Card -->
-        <div class="col-xxl-4 col-xl-12">
-
-          <div class="card info-card customers-card">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-people"></i>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                  <div class="col-sm-2">
+                    <input type="date" name="tanggal_laahir" class="form-control">
+                  </div>
                 </div>
-                <div class="ps-3">
-                  <h6>1244</h6>
-                  <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
+                  <div class="col-sm-6">
+                    <input type="text" name="alamat" class="form-control" id="inputText" placeholder="Masukan Alamat ..">
+                  </div>
                 </div>
-              </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">No.HP</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="telepon" class="form-control" id="inputEmail" placeholder="08 ..">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">e-mail</label>
+                  <div class="col-sm-3">
+                    <input type="email" name="email" class="form-control" id="inputPassword" placeholder="@ .."> 
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">Agama</label>
+                  <div class="col-sm-2">
+                  <select id="inputState" name="agama" class="form-select">
+                    <option selected>Pilih...</option>
+                    <option value="Islam">islam</option>
+                    <option value="Kristen Protestan">kristen-Protestan</option>
+                    <option value="Kristen Katolik">Kristen-Katolik</option>
+                    <option value="Budha">Budha</option>
+                    <option value="Hindu">Hindu</option>
+                  </select>
+                  </div>
+                </div>
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">kewarganegawaan</legend>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="kewarganegaraan" id="gridRadios1" value="Indonesia" checked>
+                      <label class="form-check-label" for="gridRadios1">
+                        Indonesia
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Asing">
+                      <label class="form-check-label" for="gridRadios2">
+                        Asing
+                      </label>
+                    </div>
+                    
+                  </div>
+                  <hr>
+                </fieldset>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End Horizontal Form -->
 
             </div>
-          </div>
+</div>
 
-        </div><!-- End Customers Card -->
-
-        <!-- Recent Sales -->
-        <div class="col-12">
-          <div class="card recent-sales overflow-auto">
-
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-              <table class="table table-borderless datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Jenis kelamin</th>
-                    <th scope="col">Tanggal Lahir</th>
-                    <th scope="col">Alamat</th>
-                    <th scope="col">Telepon </th>
-                    <th scope="col">email</th>
-                    <th scope="col">Kelas </th>
-                    <th scope="col">Jurusan</th>
-                    <th scope="col">Aksi</th>
-                  </tr>
-                </thead>
-                
-              </table>
-
-            </div>
-
-          </div>
-        </div><!-- End Recent Sales -->
-
-            
-
-          </div><!-- End sidebar recent posts-->
-
-        </div>
-      </div><!-- End News & Updates -->
-
-    </div><!-- End Right side columns -->
-
-  </div>
-</section>
-
-</main><!-- End #main -->
-
-@include('layouts.footer')
+@endsection

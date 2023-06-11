@@ -1,18 +1,8 @@
-@include('layouts.navbar')
-@include('layouts.sidebar')
+@extends('layouts.master')
 
-<main id="main" class="main">
+@section('title','Index Siswa')
 
-<div class="pagetitle">
-  <h1>Dashboard</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
-  </nav>
-</div><!-- End Page Title -->
-
+@section('content')
 <section class="section dashboard">
   <div class="row">
 
@@ -179,7 +169,7 @@
                         <td>{{ $a->kelas }}</td>
                         <td>{{ $a->jurusan }}</td>
                         <td><button type="button" class="btn btn-info" title="Lihat {{$a->nama}} bio"><i class="fa-solid fa-eye"></i></button></td>
-                        <td><button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio"><a href="{{route('siswa.create')}}"><i class="fa-regular fa-pen-to-square" ></i></a></button></td>
+                        <td><a href="{{route('siswa.create')}}"><button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio"><i class="fa-regular fa-pen-to-square" ></i></button></a></td>
                         <td><button type="button" class="btn btn-danger" title="hapus {{$a->nama}} bio"><a href="{{route('siswa.create')}}"><i class="fa-solid fa-trash" ></i></a></button></td>
                         
                         
@@ -209,5 +199,4 @@
 </section>
 
 </main><!-- End #main -->
-
-@include('layouts.footer')
+@endsection

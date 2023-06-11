@@ -18,4 +18,8 @@ class SiswaController extends Controller
         
         return view('siswa/create');
     }
+
+    public function storage(Request  $request){
+        dd($request);
+    }
 }

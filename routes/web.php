@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,5 +28,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'] )->nam
 // route siswa
 Route::get('/siswa', [App\Http\Controllers\SiswaController::class, 'index'] )->name('siswa');
 Route::get('/siswa/create', [App\Http\Controllers\SiswaController::class, 'create'] )->name('siswa.create');
+Route::post('/siswa',[SiswaController::class,'storage'])->name('siswa.storage');
 
 

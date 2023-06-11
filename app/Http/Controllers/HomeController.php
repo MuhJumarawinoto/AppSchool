@@ -31,7 +31,7 @@ class HomeController extends Controller
         // $siswa = siswa::all();
 
         // return view('index')->with('siswa', $siswa);
-        return view('home');
+        return view('index');
         
     }
 }
