@@ -138,8 +138,25 @@
             </div>
             </div>
 <!-- pagination limit -->
-<form action="{{ route('siswa') }}" method="get">
+                  
+              <!-- end limit -->
+ <!-- Recent Sales -->
+ 
+            <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+            
+            
+
+              <div class="card-body ">
+                <h5 class="card-title">Data Siswa <span>| Kelas </span>
+                <br>
+                <p> 
+                  
+                </p></h5>
+                <form action="{{ route('siswa') }}" method="get">
+
                       <label for="per_page">Batasan:</label>
+                      
                       <select name="per_page" id="per_page" onchange="this.form.submit()">
                           @foreach ([5, 10, 15, 20, 25] as $perPage)
                               <option value="{{ $perPage }}" {{ ($perPage == $siswa->perPage()) ? 'selected' : '' }}>
@@ -147,32 +164,12 @@
                               </option>
                           @endforeach
                       </select>
+                    <br>
                   </form>
-              <!-- end limit -->
- <!-- Recent Sales -->
- 
-            <div class="col-12">
-            <div class="card recent-sales overflow-auto">
-            <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
                   
-            </div>
-
-              <div class="card-body ">
-                <h5 class="card-title">Data Siswa <span>| Kelas </span></h5>
-                <div class="col-4 ">
-                  <a href="{{route('siswa.create')}}"><button  class="btn btn-primary">TAMBAH DATA</button></a>
-                </div>
-                <table class="table table-borderless datatable">
+                    <a href="{{route('siswa.create')}}"><button  class="btn btn-primary">TAMBAH DATA</button></a>
+                  
+              <table class="table table-borderless datatable">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
@@ -202,10 +199,9 @@
                         <td>{{ $a->tanggal_lahir }}</td>
                         <td>{{ $a->alamat }}</td>
                         <td>{{ $a->telepon }}</td>
-                        <td>{{ $a->email }}</td>
                         <td>{{ $a->kelas }}</td>
                         <td>{{ $a->jurusan }}</td>
-                        <td><button type="button" class="btn btn-info" title="Lihat {{$a->nama}} bio"><i class="fa-solid fa-eye"></i></button></td>
+                        <td><a href="{{route('siswa.profile', $a->id) }}"><button type="button" class="btn btn-info" title="Lihat {{$a->nama}} bio"><i class="fa-solid fa-eye"></i></button></td></a>
                         <td><a href="{{route('siswa.create')}}"><button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio"><i class="fa-regular fa-pen-to-square" ></i></button></a></td>
                         <td><button type="button" class="btn btn-danger" title="hapus {{$a->nama}} bio"><a href="{{route('siswa.create')}}"><i class="fa-solid fa-trash" ></i></a></button></td>
                         
@@ -221,6 +217,7 @@
                 
                </table>        
               </div>
+            </div>
             </div>
         </div>
         </div>

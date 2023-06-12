@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SiswaController;
+use Database\Seeders\SiswaSeeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'] )->nam
 Route::get('/siswa', [App\Http\Controllers\SiswaController::class, 'index'] )->name('siswa');
 Route::get('/siswa/create', [App\Http\Controllers\SiswaController::class, 'create'] )->name('siswa.create');
 Route::post('/siswa',[SiswaController::class,'storage'])->name('siswa.storage');
-
+Route::get('/siswa/{id}/profile',[SiswaController::class,'profile'])->name('siswa.profile');
+Route::match(['put', 'patch'], '/siswa/{siswa}', [SiswaController::class, 'update'])->name('siswa.update');
 
 
 Auth::routes();

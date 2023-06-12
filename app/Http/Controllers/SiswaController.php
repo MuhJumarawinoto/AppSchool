@@ -16,7 +16,7 @@ class SiswaController extends Controller
         $perPage = $request->input('per_page', 10);
         $siswa = siswa::paginate($perPage);
         
-        return view('siswa/index')->with('siswa', $siswa);
+        return view('siswa/index',compact('siswa'));
 
     }
 
@@ -63,5 +63,15 @@ class SiswaController extends Controller
         
             
     
+    }
+    public function profile ($id){
+        
+            $siswa = siswa::find($id);
+            // dd($siswa);
+            return view('siswa/profile')->with('siswa', $siswa);
+    }
+
+    public function update(Siswa $siswa, Request $request){
+            dd($request);
     }
 }
