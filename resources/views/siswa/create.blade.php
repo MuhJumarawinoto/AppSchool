@@ -191,23 +191,55 @@
                         Indonesia
                       </label>
                     </div>
+                    
+
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Asing">
                       <label class="form-check-label" for="gridRadios2">
                         Asing
                       </label>
                     </div>
-                    
-                  </div>
+                    </fieldset>
                   <hr>
-                </fieldset>
+                  <div id="form-container" class="row mb-12">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">sosmed</label>
+                        <div class="col-sm-3">
+                          <select id="inputState" name="nama" class="form-select">
+                            <option value="" disabled selected hidden>Pilih ..</option>
+                            <option value="twiter">twiter</option>
+                            <option value="Facebook">Facebook</option>
+                            <option value="TikTok">TikTok</option>
+                            <option value="Instagram">Instagram</option>
+                          </select>
+                        </div>
+                      <div class="col-sm-3">
+                        <input type="text" name="link" class="form-control"  placeholder="Masukan link ..">
+                      </div>
+                      <div class="col-sm-2">
+                          <button id="add-form-button" class="btn btn-info">Add Form</button>
+                      </div>
+                  </div>
+                  <div id="container" class="row mb-12" ><p></p></div>
+                  <hr>
+                  <script>
+                    var myLink = document.getElementById('add-form-button');
+                    myLink.addEventListener('click', function(event) {
+                          event.preventDefault()
+                          var newDiv = document.createElement('div');
+                          // newDiv.className = 'row mb-12';
+                          newDiv.innerHTML = '<div id="container" class="row mb-12"><label for="inputEmail3" class="col-sm-2 col-form-label">sosmed</label><div class="col-sm-3"><select id="inputState" name="nama" class="form-select"><option value="" disabled selected hidden>Pilih ..</option><option value="twiter">twiter</option><option value="Facebook">Facebook</option><option value="TikTok">TikTok</option><option value="Instagram">Instagram</option></select></div><div class="col-sm-3"><input type="text" name="link" class="form-control"  placeholder="Masukan link .."></div></div><p></p>';
+                          var container = document.getElementById('container');
+                          container.appendChild(newDiv);
+                    });
+                  </script>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
+              </div>      
               </form><!-- End Horizontal Form -->
-
-            </div>
+            
 </div>
+
 
 @endsection
