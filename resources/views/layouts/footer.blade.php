@@ -27,3 +27,21 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+
+<script>
+                    $(document).ready(function() {
+                         
+
+                          $('#file').on('change', function(e) {
+                              var file = e.target.files[0];
+                              var reader = new FileReader();
+                              // alert(file);
+
+                              reader.onload = function(e) {
+                                  $('#preview').html('<img src="' + e.target.result + '" style="width: 300px; height:auto; background-color: #f1f1f1;">');
+                              }
+                              
+                              reader.readAsDataURL(file);
+                          });
+                      });
+                  </script>

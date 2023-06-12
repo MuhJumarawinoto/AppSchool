@@ -9,6 +9,12 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/css/bootstrap.min.css">
+
+  <!-- JavaScript Bootstrap (Popper.js dan Bootstrap) -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+
   <!-- Favicons -->
   <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">

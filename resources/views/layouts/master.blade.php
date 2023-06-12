@@ -12,13 +12,23 @@
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="{{asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0/dist/js/bootstrap.min.js"></script>
+
+  <!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+<!-- JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 
   <!-- Google Fonts -->
   <link href="{{asset('https://fonts.gstatic.com')}}" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <!-- <script href="{{asset('assets/js/popper.min.js')}}"></script> -->
+  <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
@@ -215,13 +225,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="{{asset('assets/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>{{Auth::user()->name}}</h6>
+              <span>{{Auth::user()->role->nama}}</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -258,10 +268,14 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+            <form action="{{route('logout')}}" method="POST" id="logout-form">
+                @csrf
+            <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
+            </form>
             </li>
 
           </ul><!-- End Profile Dropdown Items -->
@@ -279,11 +293,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>@yield('headtext')</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="index.html"></a></li>
+          <li class="breadcrumb-item active"></li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

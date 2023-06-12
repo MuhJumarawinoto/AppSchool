@@ -120,8 +120,11 @@
         <!-- Recent Sales -->
         <div class="col-12">
           <div class="card recent-sales overflow-auto">
-
+            
+            
+            
             <div class="filter">
+            
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <li class="dropdown-header text-start">
@@ -133,11 +136,43 @@
                 <li><a class="dropdown-item" href="#">This Year</a></li>
               </ul>
             </div>
+            </div>
+<!-- pagination limit -->
+<form action="{{ route('siswa') }}" method="get">
+                      <label for="per_page">Batasan:</label>
+                      <select name="per_page" id="per_page" onchange="this.form.submit()">
+                          @foreach ([5, 10, 15, 20, 25] as $perPage)
+                              <option value="{{ $perPage }}" {{ ($perPage == $siswa->perPage()) ? 'selected' : '' }}>
+                                  {{ $perPage }}
+                              </option>
+                          @endforeach
+                      </select>
+                  </form>
+              <!-- end limit -->
+ <!-- Recent Sales -->
+ 
+            <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+            <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
 
-            <div class="card-body">
-              <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                  
+            </div>
 
-              <table class="table table-borderless datatable">
+              <div class="card-body ">
+                <h5 class="card-title">Data Siswa <span>| Kelas </span></h5>
+                <div class="col-4 ">
+                  <a href="{{route('siswa.create')}}"><button  class="btn btn-primary">TAMBAH DATA</button></a>
+                </div>
+                <table class="table table-borderless datatable">
                 <thead>
                   <tr>
                     <th scope="col">No</th>
@@ -174,14 +209,20 @@
                         
                         
                     </tr>
+                    
                     @php
                         $index++;
                     @endphp
                 @endforeach
+                        
                 </tbody>
-              </table>
-
+                
+               </table>        
+              </div>
             </div>
+        </div>
+        </div>
+      
 
           </div>
         </div><!-- End Recent Sales -->

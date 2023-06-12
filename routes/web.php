@@ -31,3 +31,11 @@ Route::get('/siswa/create', [App\Http\Controllers\SiswaController::class, 'creat
 Route::post('/siswa',[SiswaController::class,'storage'])->name('siswa.storage');
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
