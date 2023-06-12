@@ -26,4 +26,8 @@ class siswa extends Model
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
+    public function sosmed(){
+        return $this->hasMany(sosmed::class);
+    }
 }
