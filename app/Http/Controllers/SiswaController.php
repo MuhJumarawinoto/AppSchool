@@ -8,6 +8,8 @@ use App\Http\Requests\StoreSiswaRequest;
 use Database\Seeders\SiswaSeeder;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UpdateRequest;
+use Illuminate\Support\Facades\Storage;
 
 class SiswaController extends Controller
 {
@@ -37,7 +39,7 @@ class SiswaController extends Controller
         
 
         $siswa = new Siswa();
-        $siswa->foto  =  $foto->hashName();
+        $siswa->foto = $foto->hashName();
         $siswa->nama = $request->nama;
         $siswa->jenis_kelamin = $request->jenis_kelamin;
         $siswa->tanggal_lahir = $request->tanggal_lahir;
@@ -64,14 +66,52 @@ class SiswaController extends Controller
             
     
     }
-    public function profile ($id){
+    public function profile (Siswa $siswa){
         
-            $siswa = siswa::find($id);
+            // $siswa = siswa::find($id);
             // dd($siswa);
-            return view('siswa/profile')->with('siswa', $siswa);
+            // return view('siswa/profile')->with('siswa', $siswa);
+            return view('siswa/profile', compact('siswa'));
     }
 
-    public function update(Siswa $siswa, Request $request){
-            dd($request);
+    public function update(UpdateRequest $request, Siswa $siswa){
+            
+                if( $request->hasFile('foto')){
+                    // simpan foto baru
+                    $foto = $request->file('foto');
+                    // dd($foto);
+                    $foto->storeAs('public/foto',$foto->hashName());
+                    // delete foto
+                    Storage::delete('public/foto'.$siswa->foto);
+
+                    $siswa->foto = $foto->hashName();
+                    $siswa->nama = $request->nama;
+                    $siswa->jenis_kelamin = $request->jenis_kelamin;
+                    $siswa->tanggal_lahir = $request->tanggal_lahir;
+                    $siswa->alamat = $request->alamat;
+                    $siswa->telepon = $request->telepon;
+                    $siswa->email = $request->email;
+                    $siswa->agama = $request->agama;
+                    $siswa->kewarganegaraan = $request->kewarganegaraan;
+                    $siswa->kelas = $request->kelas;
+                    $siswa->jurusan = $request->jurusan;
+                    $simpan = $siswa->update();
+                }
+                else {
+                $siswa->nama = $request->nama;
+                $siswa->jenis_kelamin = $request->jenis_kelamin;
+                $siswa->tanggal_lahir = $request->tanggal_lahir;
+                $siswa->alamat = $request->alamat;
+                $siswa->telepon = $request->telepon;
+                $siswa->email = $request->email;
+                $siswa->agama = $request->agama;
+                $siswa->kewarganegaraan = $request->kewarganegaraan;
+                $siswa->kelas = $request->kelas;
+                $siswa->jurusan = $request->jurusan;
+                $simpan = $siswa->update();    
+                // dd($siswa);
+                }
+
+                    return redirect()->route('siswa')->with('success','siswa berhasil di tambahkan!');
     }
 }

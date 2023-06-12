@@ -3,6 +3,22 @@
 @section('title','Index Siswa')
 
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <section class="section dashboard">
   <div class="row">
 
@@ -202,7 +218,7 @@
                         <td>{{ $a->kelas }}</td>
                         <td>{{ $a->jurusan }}</td>
                         <td><a href="{{route('siswa.profile', $a->id) }}"><button type="button" class="btn btn-info" title="Lihat {{$a->nama}} bio"><i class="fa-solid fa-eye"></i></button></td></a>
-                        <td><a href="{{route('siswa.create')}}"><button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio"><i class="fa-regular fa-pen-to-square" ></i></button></a></td>
+                        <td><a href="{{route('siswa.profile' , $a->id)}}" id="link-aktif"><button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio"><i class="fa-regular fa-pen-to-square" ></i></button></a></td>
                         <td><button type="button" class="btn btn-danger" title="hapus {{$a->nama}} bio"><a href="{{route('siswa.create')}}"><i class="fa-solid fa-trash" ></i></a></button></td>
                         
                         
@@ -236,7 +252,18 @@
     </div><!-- End Right side columns -->
 
   </div>
+  
 </section>
+<script>
+                     window.addEventListener('DOMContentLoaded', (event) => {
+                      // Otomatis melakukan klik pada elemen tertentu
+                      const element = document.getElementById('editclick');
+                      if (element) {
+                        element.click();
+                      }
+                    });
+
+                  </script>
 
 </main><!-- End #main -->
 @endsection

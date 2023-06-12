@@ -4,6 +4,22 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
     <section class="section profile">
       <div class="row">
         <div class="col-xl-4">
@@ -37,7 +53,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  <button class="nav-link" id="link-aktif" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
                 </li>
 
                 <li class="nav-item">
@@ -100,7 +116,7 @@
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
+                  <div id="bagianIni"></div>
                   <!-- Profile Edit Form -->
                   <form action="{{route('siswa.update',$siswa->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -108,9 +124,15 @@
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Pass Foto</label>
                       <div class="col-md-8 col-lg-9" id="preview1">
-                        
+                          <img src="{{asset('storage/foto/'.$siswa->foto)}}" alt="foto {{$siswa->foto}}" title="foto {{$siswa->name}}">
+                      </div>
+                      
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-md-4 col-lg-3"></div>
+                      <div class="col-md-8 col-lg-9">
                         <div class="pt-2">
-                          <a href="#" id="browseButton"class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                            <a href="#" id="browseButton"class="btn btn-primary btn-sm" title="Upload new profile image">Upload <i class="bi bi-upload"></i></a>
                             <input type="file" name="foto" id="fileInput" style="display: none;">
                             @error('foto')
                               <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -137,7 +159,7 @@
                               reader.readAsDataURL(file);
                               });
                             </script>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                          <!-- <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a> -->
                         </div>
                       </div>
                     </div>
@@ -148,7 +170,7 @@
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
                   <div class="col-sm-3">
                     <select id="inputState" name="kelas" class="form-select" >
-                        <option value="" disabled selected hidden>Pilih ..</option>
+                        <option value="{{$siswa->kelas}}" >{{$siswa->kelas}}</option>
                         <option>I</option>
                         <option>II</option>
                         <option>III</option>
@@ -165,7 +187,7 @@
                   </div>
                   <div class="col-md-3">
                   <select id="inputState" name="jurusan" class="form-select">
-                        <option value="" disabled selected hidden>Pilih ..</option>
+                        <option value="{{$siswa->jurusan}}" >{{$siswa->jurusan}}</option>
                         <option>IPA</option>
                         <option>IPS</option>
                         <option>Ekonomi</option>
@@ -182,7 +204,7 @@
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-6">
-                    <input type="text" name="nama" class="form-control" id="inputText" placeholder="Masukan Nama siswa Baru ..">
+                    <input type="text" value="{{$siswa->nama}}" name="nama" class="form-control" id="inputText" placeholder="Masukan Nama siswa Baru ..">
                   @error('nama')
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{$message}}
@@ -196,7 +218,7 @@
                   <label for="inputEmail3" name="jenis_kelamin"class="col-sm-2 col-form-label">jenis Kelamin</label>
                   <div class="col-sm-3">
                     <select id="inputState" name="jenis_kelamin" class="form-select" >
-                        <option value="" disabled selected hidden>Pilih ..</option>
+                        <option value="{{$siswa->jenis_kelamin}}">{{$siswa->jenis_kelamin}}</option>
                         <option value="L">Laki-Laki</option>
                         <option value="P">Perempuan</option>
                     </select>
@@ -211,8 +233,8 @@
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                   <div class="col-sm-3">
-                    <input type="date" name="tanggal_lahir" class="form-control">
-                    @error('jurusan')
+                    <input type="date"value="{{$siswa->tanggal_lahir}}" name="tanggal_lahir" class="form-control">
+                    @error('tanggal_lahir')
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{$message}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -223,8 +245,8 @@
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
                   <div class="col-sm-6">
-                    <input type="text" name="alamat" class="form-control" id="inputText" placeholder="Masukan Alamat ..">
-                    @error('jurusan')
+                    <input type="text" name="alamat" value="{{$siswa->alamat}}" class="form-control" id="inputText" placeholder="Masukan Alamat ..">
+                    @error('alamat')
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{$message}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -234,9 +256,9 @@
                 </div>
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">No.HP</label>
-                  <div class="col-sm-2">
-                    <input type="number" name="telepon" class="form-control" id="inputEmail" placeholder="08 ..">
-                    @error('jurusan')
+                  <div class="col-sm-6">
+                    <input type="text" name="telepon" value="{{$siswa->telepon}}" class="form-control" id="inputEmail" placeholder="08 .."></input>
+                    @error('telepon')
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{$message}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -246,9 +268,9 @@
                 </div>
                 <div class="row mb-3">
                   <label for="inputPassword3" class="col-sm-2 col-form-label">e-mail</label>
-                  <div class="col-sm-3">
-                    <input type="email" name="email" class="form-control" id="inputPassword" placeholder="@ .."> 
-                    @error('jurusan')
+                  <div class="col-sm-5">
+                    <input type="email" name="email" value="{{$siswa->email}}" class="form-control"  placeholder="{{$siswa->email}}"> 
+                    @error('email')
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{$message}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -258,9 +280,9 @@
                 </div>
                 <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Agama</label>
-                  <div class="col-sm-2">
+                  <div class="col-sm-5">
                   <select id="inputState" name="agama" class="form-select">
-                    <option value="" disabled selected hidden>Pilih ..</option>
+                    <option value="{{$siswa->agama}}">{{$siswa->agama}}</option>
                     <option value="Islam">islam</option>
                     <option value="Kristen Protestan">kristen-Protestan</option>
                     <option value="Kristen Katolik">Kristen-Katolik</option>
@@ -292,14 +314,14 @@
                     </div>
                     
                   </div>
-                  <hr>
+                  
                 </fieldset>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
               </form>
-
+              <hr>           
                     <div class="row mb-3">
                       <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                       <div class="col-md-8 col-lg-9">
@@ -340,7 +362,7 @@
                   <!-- Settings Form -->
                   <form>
 
-                    <div class="row mb-3">
+                    <div class="row mb-4">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
                       <div class="col-md-8 col-lg-9">
                         <div class="form-check">
@@ -416,5 +438,22 @@
 
         </div>
       </div>
+      <script>
+                    //  window.addEventListener('DOMContentLoaded', (event) => {
+                    //   // Otomatis melakukan klik pada elemen tertentu
+                    //   const element = document.getElementById('editclick');
+                    //   if (element) {
+                    //     element.click();
+                    //   }
+                    // });
+
+                    window.addEventListener('DOMContentLoaded', (event) => {
+                        const linkAktif = document.getElementById('link-aktif');
+                        if (linkAktif) {
+                            linkAktif.click();
+                        }
+                    });
+
+                  </script>
     </section>
 @endsection
