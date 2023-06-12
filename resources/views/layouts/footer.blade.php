@@ -38,7 +38,7 @@
                               // alert(file);
 
                               reader.onload = function(e) {
-                                  $('#preview').html('<img src="' + e.target.result + '" style="width: 300px; height:auto; background-color: #f1f1f1;">');
+                                  $('#preview').html('<img src="' + e.target.result + '" style="width: 100px; height:auto; background-color: #f1f1f1;">');
                               }
                               
                               reader.readAsDataURL(file);

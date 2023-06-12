@@ -27,30 +27,17 @@ class SiswaController extends Controller
 
     public function storage(StoreSiswaRequest $request){
 
-        // $validator = Validator::make($request->all(), [
-        //     'nama' => 'required',
-        //     'jenis_kelamin'  => 'required',
-        //     'tanggal_lahir' => 'required',
-        //     'alamat' => 'required',
-        //     'telepon' => 'required',
-        //     'email' => 'required',
-        //     'agama' => 'required',
-        //     'kewarganegaraan' => 'required',
-        //     'kelas' => 'required',
-        //     'jurusan' => 'required',
-        //     'foto' => 'required',
-        //     'catatan'=> 'required',
-        // ]);
-
-        // $validator = Validator::make($request->all());
-        
-        // if($request->fails()){
-        //     return redirect()->back()->withErrors($request)->withInput($request->all);
-        // }
-        // return redirect()->route('success')->with('success', 'Data berhasil disimpan');
 
         // dd($request);
+        // input gambar
+        $foto = $request->file('foto');
+        $foto->storeAs('public/foto',$foto->hashName());
+        // $file = $foto->hashName();
+        // dd($file);
+        
+
         $siswa = new Siswa();
+        $siswa->foto  =  $foto->hashName();
         $siswa->nama = $request->nama;
         $siswa->jenis_kelamin = $request->jenis_kelamin;
         $siswa->tanggal_lahir = $request->tanggal_lahir;
@@ -61,6 +48,8 @@ class SiswaController extends Controller
         $siswa->kewarganegaraan = $request->kewarganegaraan;
         $siswa->kelas = $request->kelas;
         $siswa->jurusan = $request->jurusan;
+
+        // 
         $simpan = $siswa->save();
 
         if($simpan){

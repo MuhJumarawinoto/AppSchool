@@ -176,6 +176,7 @@
                 <thead>
                   <tr>
                     <th scope="col">No</th>
+                    <th scope="row">Foto</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Jenis kelamin</th>
                     <th scope="col">Tanggal Lahir</th>
@@ -195,6 +196,7 @@
                 @foreach($siswa as $a)
                     <tr>
                         <th scope="row"><a href="#">{{ $index }}</a></th>
+                        <td><img style="width: 50px; height:auto;" src="{{asset('storage/foto/'.$a->foto)}}" alt=""></td>
                         <td>{{ $a->nama }}</td>
                         <td>{{ $a->jenis_kelamin }}</td>
                         <td>{{ $a->tanggal_lahir }}</td>

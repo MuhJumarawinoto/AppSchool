@@ -33,6 +33,24 @@
               <form action="{{route('siswa.storage')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <hr>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Pass Foto</label>
+                  <div class="col-sm-3">
+                    <input class="form-control" id="file" name="foto" type="file" >
+                    
+                    @error('foto')
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{$message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  @enderror
+                                       
+                  </div>
+                  <div class="col-sm-3">
+                    <div id="preview"></div>
+                  </div>
+                </div>
+                <hr>
               <div class="row mb-3">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
                   <div class="col-sm-3">
@@ -81,26 +99,6 @@
                   </div>
                   
                 </div>
-                <div class="row mb-3">
-                  <label for="inputNumber" class="col-sm-2 col-form-label">Pass Foto</label>
-                  <div class="col-sm-3">
-                    <input class="form-control" id="file" name="foto" type="file" >
-                    
-                    @error('foto')
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{$message}}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                  @enderror
-                    <br>
-                    <div id="preview"></div>
-
-                  </div>
-                                    
-                  
-                </div>
-                
-                
                 <div class="row mb-3">
                   <label for="inputEmail3" name="jenis_kelamin"class="col-sm-2 col-form-label">jenis Kelamin</label>
                   <div class="col-sm-3">
