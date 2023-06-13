@@ -202,9 +202,9 @@
                     </fieldset>
                   <hr>
                   <div id="form-container" class="row mb-12">
-                        <label for="inputEmail3" class="col-sm-2 col-form-label">sosmed</label>
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Sosmed</label>
                         <div class="col-sm-3">
-                          <select id="inputState" name="nama" class="form-select">
+                          <select id="inputState" name="nama_sosmed" class="form-select">
                             <option value="" disabled selected hidden>Pilih ..</option>
                             <option value="twiter">twiter</option>
                             <option value="Facebook">Facebook</option>
@@ -215,10 +215,13 @@
                       <div class="col-sm-3">
                         <input type="text" name="link" class="form-control"  placeholder="Masukan link ..">
                       </div>
-                      <div class="col-sm-2">
-                          <button onclick="tambahElemen()" id="add-form-button" class="btn btn-info">Add Form</button>
-                          <button onclick="deleteElemen()" id="tombolhapus" class="btn btn-info" style="display: none;">delete Form</button>
+                      <div class="col-sm-3">
+                          <button onclick="tambahElemen()" id="add-form-button" class="btn btn-primary"><i class="bi bi-plus-circle"></i></button>
+                          <button onclick="deleteElemen()" id="tombolhapus" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-circle-minus"></i></button>
                       </div>
+                    
+                          
+                      
                   </div>
                   <div id="container" class="row mb-12" ><p></p></div>
                   <hr>
@@ -231,7 +234,7 @@
                           var newDiv = document.createElement('div');
                           elemen.style.display = 'block';
 
-                          newDiv.innerHTML = '<div id="container" class="row mb-12"><label for="inputEmail3" class="col-sm-2 col-form-label">sosmed</label><div class="col-sm-3"><select id="inputState" name="nama" class="form-select"><option value="" disabled selected hidden>Pilih ..</option><option value="twiter">twiter</option><option value="Facebook">Facebook</option><option value="TikTok">TikTok</option><option value="Instagram">Instagram</option></select></div><div class="col-sm-3"><input type="text" name="link" class="form-control"  placeholder="Masukan link .."></div></div><button id="delete-form-button" class="">Delete Form</button><p></p>';
+                          newDiv.innerHTML = '<div id="container" class="row mb-12"><label for="inputEmail3" class="col-sm-2 col-form-label">sosmed</label><div class="col-sm-3"><select id="inputState" name="nama" class="form-select"><option value="" disabled selected hidden>Pilih ..</option><option value="twiter">twiter</option><option value="Facebook">Facebook</option><option value="TikTok">TikTok</option><option value="Instagram">Instagram</option></select></div><div class="col-sm-3"><input type="text" name="link" class="form-control"  placeholder="Masukan link .."></div></div><p></p>';
                           var container = document.getElementById('container');
                           container.appendChild(newDiv);
                     };

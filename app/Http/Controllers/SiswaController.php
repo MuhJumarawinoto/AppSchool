@@ -9,6 +9,7 @@ use Database\Seeders\SiswaSeeder;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UpdateRequest;
+use App\Models\sosmed;
 use Illuminate\Support\Facades\Storage;
 
 class SiswaController extends Controller
@@ -28,17 +29,19 @@ class SiswaController extends Controller
     }
 
     public function storage(StoreSiswaRequest $request){
-
-
-        // dd($request);
-        // input gambar
-        $foto = $request->file('foto');
-        $foto->storeAs('public/foto',$foto->hashName());
-        // $file = $foto->hashName();
-        // dd($file);
+        
+        // inisialisasi tabel siswa dan sosmed
+        $siswa = new Siswa();
+        $sosmed = new sosmed();
+        
         
 
-        $siswa = new Siswa();
+        
+
+        // simpan inisialisasi request file 'foto'
+        $foto = $request->file('foto');
+        $foto->storeAs('public/foto',$foto->hashName());
+        // simpan ke tabel siswa
         $siswa->foto = $foto->hashName();
         $siswa->nama = $request->nama;
         $siswa->jenis_kelamin = $request->jenis_kelamin;
@@ -50,21 +53,16 @@ class SiswaController extends Controller
         $siswa->kewarganegaraan = $request->kewarganegaraan;
         $siswa->kelas = $request->kelas;
         $siswa->jurusan = $request->jurusan;
-
-        // 
         $simpan = $siswa->save();
 
-        if($simpan){
-            return redirect()->route('siswa.create')->with('success','siswa berhasil di tambahkan!');
-        }
-        else{
-            return redirect()->route('siswa.create')->with('error','siswa gagal di tambahkan!');
-        }
-        // dd($siswa);
+        // menambahkan ke tabel sosmed
+        $sosmed->siswa_id = $siswa->id;
+        $sosmed->nama = $request->nama_sosmed;
+        $sosmed->link = $request->link;
+        $sosmed->save();
 
+        return redirect()->route('siswa.create')->with('success','siswa berhasil di tambahkan!');
         
-            
-    
     }
     public function profile (Siswa $siswa){
         
