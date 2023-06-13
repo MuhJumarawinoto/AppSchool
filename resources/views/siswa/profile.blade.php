@@ -31,6 +31,7 @@
               
               <h2>{{$siswa->nama}}</h2>
               <h3>{{$siswa->kelas}} {{$siswa->jurusan}}</h3>
+
               <div class="social-links mt-2">
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -184,7 +185,7 @@
                 
                 
                 <hr>
-              <div class="row mb-3">
+              <div class="row mb-4">
                   <label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
                   <div class="col-sm-3">
                     <select id="inputState" name="kelas" class="form-select" >
@@ -315,9 +316,9 @@
                   @enderror
                   </div>
                 </div>
-                <fieldset class="row mb-3">
-                  <legend class="col-form-label col-sm-2 pt-0">kewarganegawaan</legend>
-                  <div class="col-sm-10">
+                <fieldset class="row mb-4">
+                  <label for="inputEmail3" class="col-sm-3 col-form-label">kewarganegawaan</label>
+                  <div class="col-sm-8">
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="kewarganegaraan" id="gridRadios1" value="Indonesia" checked>
                       <label class="form-check-label" for="gridRadios1">
@@ -334,42 +335,79 @@
                   </div>
                   
                 </fieldset>
-                <div class="text-center">
+                <!-- <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
                   <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-              </form>
-              <hr>           
+                </div> -->
+                <hr>
+              
+                  @foreach($siswa->sosmed as $q)
                     <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
+                      <label for="" class="col-md-4 col-lg-3 col-form-label">{{$q->nama}}</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
+                        <input name="twitter" type="text" class="form-control" id="Twitter" value="{{$q->link}}">
                       </div>
                     </div>
+                  @endforeach
 
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                      </div>
+                    <hr> 
+                    <div id="container" class="row mb-12" ><p></p>
+                        <div class="col-sm-12">   
+                          <div id="form-container" class="row mb-12">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Sosmed</label>
+                              <div class="col-sm-3">
+                                <select id="inputState" name="nama_sosmed[]" class="form-select">
+                                  <option value="" disabled selected hidden>Pilih ..</option>
+                                  <option value="twiter">twiter</option>
+                                  <option value="Facebook">Facebook</option>
+                                  <option value="TikTok">TikTok</option>
+                                  <option value="Instagram">Instagram</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-3">
+                                <input type="text" name="link[]" class="form-control"  placeholder="Masukan link ..">
+                              </div>      
+                              <div class="col-sm-1">
+                                <button onclick="tambahElemen()" id="add-form-button" class="btn btn-primary"><i class="bi bi-plus-circle"></i></button>
+                                </div>
+                              <div class="col-sm-1">
+                                <button onclick="deleteElemen()" id="tombolhapus" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-circle-minus"></i></button>
+                              </div>
+                              <div id="container" class="row mb-12" ><p></p></div>
+                                      
+                          </div>
+                        </div>
                     </div>
+                    <hr>
+                  <script>
+                    var elemen = document.getElementById('tombolhapus');
+                    var tampilan = elemen.style.display;
+                    let i= 0;
 
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                      </div>
-                    </div>
+                    function tambahElemen() {
+                      i++
+                      // alert(i);
+                          event.preventDefault();
+                          var newDiv = document.createElement('div');
+                          
+                          elemen.style.display = 'block';
 
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                      </div>
-                    </div>
+                          newDiv.innerHTML = `<div id="container" class="row mb-12"><label class="col-sm-2 col-form-label">sosmed</label><div class="col-sm-3"><select name="nama_sosmed[]" class="form-select"><option value="" disabled selected hidden>Pilih ..</option><option value="twiter">twiter</option><option value="Facebook">Facebook</option><option value="TikTok">TikTok</option><option value="Instagram">Instagram</option></select></div><div class="col-sm-3"><input type="text" name="link[]" class="form-control"  placeholder="Masukan link .."></div></div><p></p>`;
+                          var container = document.getElementById('container');
+                          container.appendChild(newDiv);
+                    };
 
+                    function deleteElemen() {
+                          var container = document.getElementById('container');
+                          event.preventDefault();
+
+                          // Menghapus elemen terakhir dalam container
+                          container.removeChild(container.lastChild);
+                        };
+                  </script>           
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="reset" class="btn btn-secondary">Reset</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
 
@@ -457,13 +495,6 @@
         </div>
       </div>
       <script>
-                    //  window.addEventListener('DOMContentLoaded', (event) => {
-                    //   // Otomatis melakukan klik pada elemen tertentu
-                    //   const element = document.getElementById('editclick');
-                    //   if (element) {
-                    //     element.click();
-                    //   }
-                    // });
 
                     window.addEventListener('DOMContentLoaded', (event) => {
                         const linkAktif = document.getElementById('link-aktif');

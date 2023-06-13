@@ -74,7 +74,7 @@ class SiswaController extends Controller
 
     public function update(UpdateRequest $request, Siswa $siswa){
 
-                dd($request);
+                // dd($request);
                 if( $request->hasFile('foto')){
                     // simpan foto baru
                     $foto = $request->file('foto');
@@ -111,6 +111,22 @@ class SiswaController extends Controller
                 // dd($siswa);
                 }
 
+                foreach ($request['nama_sosmed'] as $index => $nama) {
+                    $sosmed = new sosmed();
+                    $sosmed->siswa_id = $siswa->id;
+                    $sosmed->nama = $nama;
+                    $sosmed->link = $request['link'][$index];
+                    $sosmed->save();
+                }
+
                     return redirect()->route('siswa')->with('success','siswa berhasil di tambahkan!');
     }
+
+    public function delete(Siswa $siswa){
+
+        Storage::delete('public/foto/'.$siswa->foto);
+
+        $siswa->delete();
+        return redirect()->route('siswa')->with(['success'=>'Siswa Berhasil di Hapus!']);
+    } 
 }

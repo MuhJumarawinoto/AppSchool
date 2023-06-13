@@ -219,8 +219,9 @@
                         <td>{{ $a->jurusan }}</td>
                         <td><a href="{{route('siswa.profile', $a->id) }}"><button type="button" class="btn btn-info" title="Lihat {{$a->nama}} bio"><i class="fa-solid fa-eye"></i></button></td></a>
                         <td><a href="{{route('siswa.profile' , $a->id)}}" id="link-aktif"><button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio"><i class="fa-regular fa-pen-to-square" ></i></button></a></td>
-                        <td><button type="button" class="btn btn-danger" title="hapus {{$a->nama}} bio"><a href="{{route('siswa.create')}}"><i class="fa-solid fa-trash" ></i></a></button></td>
-                        
+                        <td><form action="{{route('siswa.delete',$a->id) }}" method="POST">@csrf
+                        @method('DELETE') <button type="submit" class="btn btn-danger" title="hapus {{$a->id}} bio"><i class="fa-solid fa-trash" ></i></a></button> </form>
+                        </td>
                         
                     </tr>
                     

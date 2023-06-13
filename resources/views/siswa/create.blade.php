@@ -206,7 +206,7 @@
                         <div class="col-sm-3">
                           <select id="inputState" name="nama_sosmed[]" class="form-select">
                             <option value="" disabled selected hidden>Pilih ..</option>
-                            <option value="twiter">twiter</option>
+                            <option value="Twitter">twiter</option>
                             <option value="Facebook">Facebook</option>
                             <option value="TikTok">TikTok</option>
                             <option value="Instagram">Instagram</option>
