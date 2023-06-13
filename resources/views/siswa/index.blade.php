@@ -143,7 +143,7 @@
 
           <!-- Per Page -->
                   <div class="row mb-3">
-                    <div class="col-sm-8">
+                    <div class="col-sm-6">
                       <form action="{{ route('siswa') }}" method="get">
                         <label for="per_page" class="col-form-label">Batasan:</label>
                         <select name="per_page" class="col-form-label" id="per_page" onchange="this.form.submit()">
@@ -157,20 +157,22 @@
                       </form>
                     </div>
                     
+                    <div class="col-sm-4 float-right">
                     <!-- Search bar table -->
-                    <div class="search-bar col-sm-3">
-                      <form class="search-form d-flex align-items-center" method="GET" action="{{route('siswa')}}">
-                        <input type="text" name="keyword" class="form-control" placeholder="Search" title="Enter search keyword" value="{{$keyword}}">
-                        <button type="submit" class="btn btn-outline-info" title="Search"><i class="bi bi-search"></i></button>
-                      </form>
-                    </div>
+                      <div class="search-bar col-md-12">
+                          <form class="search-form d-flex align-items-center" method="GET" action="{{route('siswa')}}">
+                            <input type="text" name="keyword" class="form-control" placeholder="Search" title="Enter search keyword" value="{{$keyword}}">
+                            <button type="submit" class="btn btn-outline-info" title="Search"><i class="bi bi-search"></i></button>
+                          </form>
+                        </div>
                     <!-- End Search Bar -->
-                    
-                    <div class="col-sm-1 float-right">
-
-                      <a href="{{route('siswa.create')}}">
-                        <button  class="btn btn-primary" ><i class="bi bi-person-plus-fill"> </i></button>
-                      </a>
+                    </div>
+                    <div class="col-sm-2 float-right">
+                      <div class="search-bar col-md-12">
+                        <a href="{{route('siswa.create')}}">
+                            <button  class="btn btn-primary" ><i class="bi bi-person-plus-fill"></i> Tambah</button>
+                        </a>
+                      </div>
                     </div>
                   </div>
                   <hr>
@@ -183,7 +185,7 @@
                     <th scope="row">Foto</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Jenis kelamin</th>
-                    <th scope="col">Tanggal Lahir</th>s
+                    <th scope="col">Tanggal Lahir</th>
                     <th scope="col">Telepon </th>
                     <th scope="col">Kelas </th>
                     <th scope="col">Jurusan</th>
