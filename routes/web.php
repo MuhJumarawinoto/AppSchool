@@ -33,6 +33,7 @@ Route::post('/siswa',[SiswaController::class,'storage'])->name('siswa.storage');
 Route::get('/siswa/{siswa}/profile',[SiswaController::class,'profile'])->name('siswa.profile');
 Route::match(['put', 'patch'], '/siswa/{siswa}/profile', [SiswaController::class, 'update'])->name('siswa.update');
 Route::delete('/siswa/{siswa}',[SiswaController::class,'delete'])->name('siswa.delete');
+// Route::get('/siswa/search',[SiswaController::class,'search'])->name('siswa.search');
 
 
 Auth::routes();

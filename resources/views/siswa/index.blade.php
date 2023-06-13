@@ -143,7 +143,7 @@
 
           <!-- Per Page -->
                   <div class="row mb-3">
-                    <div class="col-sm-11">
+                    <div class="col-sm-8">
                       <form action="{{ route('siswa') }}" method="get">
                         <label for="per_page" class="col-form-label">Batasan:</label>
                         <select name="per_page" class="col-form-label" id="per_page" onchange="this.form.submit()">
@@ -156,7 +156,18 @@
                         <br>
                       </form>
                     </div>
+                    
+                    <!-- Search bar table -->
+                    <div class="search-bar col-sm-3">
+                      <form class="search-form d-flex align-items-center" method="GET" action="{{route('siswa')}}">
+                        <input type="text" name="keyword" class="form-control" placeholder="Search" title="Enter search keyword" value="{{$keyword}}">
+                        <button type="submit" class="btn btn-outline-info" title="Search"><i class="bi bi-search"></i></button>
+                      </form>
+                    </div>
+                    <!-- End Search Bar -->
+                    
                     <div class="col-sm-1 float-right">
+
                       <a href="{{route('siswa.create')}}">
                         <button  class="btn btn-primary" ><i class="bi bi-person-plus-fill"> </i></button>
                       </a>
@@ -167,15 +178,13 @@
                        
               <table class="table table-striped">
                 <thead>
-                  <tr>
+                  <tr class="table-primary">
                     <th scope="col">Id</th>
                     <th scope="row">Foto</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Jenis kelamin</th>
-                    <th scope="col">Tanggal Lahir</th>
-                    <th scope="col">Alamat</th>
+                    <th scope="col">Tanggal Lahir</th>s
                     <th scope="col">Telepon </th>
-                    <th scope="col">email</th>
                     <th scope="col">Kelas </th>
                     <th scope="col">Jurusan</th>
                     <th scope="col">Aksi</th>
@@ -196,29 +205,27 @@
                         <td>{{ $a->nama }}</td>
                         <td>{{ $a->jenis_kelamin }}</td>
                         <td>{{ $a->tanggal_lahir }}</td>
-                        <td>{{ $a->alamat }}</td>
                         <td>{{ $a->telepon }}</td>
                         <td>{{ $a->kelas }}</td>
                         <td>{{ $a->jurusan }}</td>
                         <td>
                           <a href="{{route('siswa.profile', $a->id) }}">
-                            <button type="button" class="btn btn-info" title="Lihat {{$a->nama}} bio">
+                            <button type="button" class="btn btn-info btn-sm" title="Lihat {{$a->nama}} bio">
                               <i class="fa-solid fa-eye"></i>
                             </button>
                           </a>
-                        </td>
-                        <td>
+                        
+                        
                           <a href="{{route('siswa.profile' , $a->id)}}" id="link-aktif">
-                            <button type="button" class="btn btn-warning" title="edit {{$a->nama}} bio">
+                            <button type="button" class="btn btn-warning btn-sm" title="edit {{$a->nama}} bio">
                               <i class="fa-regular fa-pen-to-square" ></i>
                             </button>
                           </a>
-                        </td>
-                        <td>
+                        
                           <form action="{{route('siswa.delete',$a->id) }}" method="POST">
                             @csrf
                             @method('DELETE') 
-                            <button type="submit" class="btn btn-danger" title="hapus {{$a->id}} bio">
+                            <button type="submit" class="btn btn-danger btn-sm" title="hapus {{$a->id}} bio">
                               <i class="fa-solid fa-trash" >
                               </i>
                             </button> 
@@ -250,14 +257,4 @@
   <!-- End Recent Sales -->
 </section>
 <!-- end section -->
-<script>
-  window.addEventListener('DOMContentLoaded', (event) => 
-  {
-   // Otomatis melakukan klik pada elemen tertentu
-   const element = document.getElementById('editclick');
-   if (element) {
-     element.click();
-   }
-  });
-</script>
 @endsection

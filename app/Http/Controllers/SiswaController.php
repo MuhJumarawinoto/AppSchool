@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\siswa;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSiswaRequest;
 use Database\Seeders\SiswaSeeder;
@@ -16,12 +16,24 @@ class SiswaController extends Controller
 {
     public function index (Request $request){
 
-        $perPage = $request->input('per_page', 10);
-        $siswa = siswa::paginate($perPage);
-        
-        return view('siswa/index',compact('siswa'));
+        $perPage = $request->input('per_page', 5);
+        $keyword = $request->input('keyword');
+        // dd($keyword);
+        $siswa = Siswa::query();
 
-    }
+        if ($keyword) {
+            $siswa->where('nama', 'like', "%{$keyword}%")
+                ->orWhere('jurusan', 'like', "%{$keyword}%")
+                ->orWhere('alamat', 'like', "%{$keyword}%");
+        }
+
+        $siswa = $siswa->paginate($perPage);
+
+        return view('siswa.index', compact('siswa', 'keyword', 'perPage'));
+
+    }        
+               
+
 
     public function create(){
         
@@ -129,4 +141,9 @@ class SiswaController extends Controller
         $siswa->delete();
         return redirect()->route('siswa')->with(['success'=>'Siswa Berhasil di Hapus!']);
     } 
+
+    public function search (){
+    
+    }
+
 }
