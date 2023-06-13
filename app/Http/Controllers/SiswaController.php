@@ -65,11 +65,10 @@ class SiswaController extends Controller
         return redirect()->route('siswa.create')->with('success','siswa berhasil di tambahkan!');
         
     }
-    public function profile (Siswa $siswa){
+    public function profile (siswa $siswa){
         
-            // $siswa = siswa::find($id);
+            $siswa = siswa::with('sosmed')->find($siswa->id);
             // dd($siswa);
-            // return view('siswa/profile')->with('siswa', $siswa);
             return view('siswa/profile', compact('siswa'));
     }
 

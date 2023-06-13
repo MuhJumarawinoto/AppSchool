@@ -113,6 +113,24 @@
                     <div class="col-lg-9 col-md-8">{{$siswa->kewarganegaraan}} </div>
                   </div>
 
+                  <hr>
+                  <h5 class="card-title">Profile Details</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Sosial media</div>
+                    <div class="col-lg-9 col-md-8">
+                    <ul>
+                       <!--  -->
+                       @foreach($siswa->sosmed as $i)
+                       <div class="row mb-3">
+                          <label for="inputEmail3" class="col-sm-3 ">{{ $i->nama }}</label>
+                          <div class="col-sm-6">{{ $i->link }}</div>
+                        </div>
+                       <!--  -->
+                       @endforeach    
+                    </ul>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
