@@ -216,21 +216,33 @@
                         <input type="text" name="link" class="form-control"  placeholder="Masukan link ..">
                       </div>
                       <div class="col-sm-2">
-                          <button id="add-form-button" class="btn btn-info">Add Form</button>
+                          <button onclick="tambahElemen()" id="add-form-button" class="btn btn-info">Add Form</button>
+                          <button onclick="deleteElemen()" id="tombolhapus" class="btn btn-info" style="display: none;">delete Form</button>
                       </div>
                   </div>
                   <div id="container" class="row mb-12" ><p></p></div>
                   <hr>
                   <script>
-                    var myLink = document.getElementById('add-form-button');
-                    myLink.addEventListener('click', function(event) {
-                          event.preventDefault()
+                    var elemen = document.getElementById('tombolhapus');
+                    var tampilan = elemen.style.display;
+
+                    function tambahElemen() {
+                          event.preventDefault();
                           var newDiv = document.createElement('div');
-                          // newDiv.className = 'row mb-12';
-                          newDiv.innerHTML = '<div id="container" class="row mb-12"><label for="inputEmail3" class="col-sm-2 col-form-label">sosmed</label><div class="col-sm-3"><select id="inputState" name="nama" class="form-select"><option value="" disabled selected hidden>Pilih ..</option><option value="twiter">twiter</option><option value="Facebook">Facebook</option><option value="TikTok">TikTok</option><option value="Instagram">Instagram</option></select></div><div class="col-sm-3"><input type="text" name="link" class="form-control"  placeholder="Masukan link .."></div></div><p></p>';
+                          elemen.style.display = 'block';
+
+                          newDiv.innerHTML = '<div id="container" class="row mb-12"><label for="inputEmail3" class="col-sm-2 col-form-label">sosmed</label><div class="col-sm-3"><select id="inputState" name="nama" class="form-select"><option value="" disabled selected hidden>Pilih ..</option><option value="twiter">twiter</option><option value="Facebook">Facebook</option><option value="TikTok">TikTok</option><option value="Instagram">Instagram</option></select></div><div class="col-sm-3"><input type="text" name="link" class="form-control"  placeholder="Masukan link .."></div></div><button id="delete-form-button" class="">Delete Form</button><p></p>';
                           var container = document.getElementById('container');
                           container.appendChild(newDiv);
-                    });
+                    };
+
+                    function deleteElemen() {
+                          var container = document.getElementById('container');
+                          event.preventDefault();
+
+                          // Menghapus elemen terakhir dalam container
+                          container.removeChild(container.lastChild);
+                        };
                   </script>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
