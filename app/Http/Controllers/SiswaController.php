@@ -24,7 +24,8 @@ class SiswaController extends Controller
         if ($keyword) {
             $siswa->where('nama', 'like', "%{$keyword}%")
                 ->orWhere('jurusan', 'like', "%{$keyword}%")
-                ->orWhere('alamat', 'like', "%{$keyword}%");
+                ->orWhere('alamat', 'like', "%{$keyword}%")
+                ->orWhere('id', 'like', "%{$keyword}%");
         }
 
         $siswa = $siswa->paginate($perPage);
@@ -155,10 +156,13 @@ class SiswaController extends Controller
     }
 
     public function delete(Siswa $siswa){
-
+        // dd($siswa->id);
+        $sosmed = Sosmed::where('siswa_id',$siswa->id)->delete();
         Storage::delete('public/foto/'.$siswa->foto);
-
+        
         $siswa->delete();
+        
+        // dd($sosmed);
         return redirect()->route('siswa')->with(['success'=>'Siswa Berhasil di Hapus!']);
     } 
 

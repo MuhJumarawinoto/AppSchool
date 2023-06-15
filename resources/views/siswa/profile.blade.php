@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
                     <div class="col-sm-3">
                         <select id="inputState" name="kelas" class="form-select" >
@@ -134,7 +134,7 @@
                         @enderror
                     </div>
                     
-                    <div class="col-sm-1">
+                    <div class="col-sm-3">
                         <label for="inputEmail3" class="col-sm-12 col-form-label">Jurusan</label>
                     </div>
 
@@ -297,10 +297,10 @@
                           <input type="text" name="linkSosmed[{{ $i }}][link]" class="form-control"  placeholder="" value="{{$q->link}}"></input>
                         </div> 
                         <div class="col-sm-3">
-                          <input type="text" value="{{ $q->id }}">
+                          <!-- <input type="text" value="{{ $q->id }}"> -->
                           <!-- <form action="{{route('sosmed.delete', ['siswa' => $siswa->id, 'sosmed' => $q->id]) }}" method="POST"> -->
-                          <input type="text" value="{{ $q->id }}" name="id_sosmed">                      
-                          <button type="button" @click="deleteItem('{{ $q->id }}')">Hapus</button>                              
+                          <!-- <input type="text" value="{{ $q->id }}" name="id_sosmed">                       -->
+                          <button type="button" class="btn btn-danger"  @click="deleteItem('{{ $q->id }}')">Hapus</button>                              
                         </div>
                         </p>
                     </div>
@@ -328,10 +328,11 @@
                         methods: {
                           deleteItem(id_sosmed)  
                           {
+                            if (confirm('yakin menghapus sosmed ini ?')) {
                             // Mengirim permintaan DELETE menggunakan Axios
                             axios.delete('{{ url('sosmed') }}' +'/'+id_sosmed )
                               .then(response => {
-                                // console.log(response.data);
+                                console.log(response.data);
                                 // Mengupdate daftar item setelah penghapusan berhasil
                                 // this.getItems();
                                 location.reload();
@@ -339,6 +340,7 @@
                               .catch(error => {
                                 console.error(error);
                               });
+                            }
                           }
                         }
                       });
