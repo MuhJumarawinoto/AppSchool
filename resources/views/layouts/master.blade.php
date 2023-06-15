@@ -8,6 +8,9 @@
   <title>@yield('title')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <!-- vue dan axio CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <!-- jquery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

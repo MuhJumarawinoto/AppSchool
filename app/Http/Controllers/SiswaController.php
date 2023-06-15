@@ -85,7 +85,19 @@ class SiswaController extends Controller
     }
 
     public function update(UpdateRequest $request, Siswa $siswa){
+            // dd($request->all());
 
+                if (is_array($request->linkSosmed)) 
+                {
+                    foreach ($request->linkSosmed as $namaSosmed) 
+                    {
+                      $sosmed = sosmed::where('id', $namaSosmed['id'])->update([
+                                'link' => $namaSosmed['link'],
+                                'nama' => $namaSosmed['nama']
+                        ]);
+                    };
+                }
+                
                 // dd($request);
                 if( $request->hasFile('foto')){
                     // simpan foto baru
@@ -107,6 +119,7 @@ class SiswaController extends Controller
                     $siswa->kelas = $request->kelas;
                     $siswa->jurusan = $request->jurusan;
                     $simpan = $siswa->update();
+
                 }
                 else {
                 $siswa->nama = $request->nama;
@@ -122,16 +135,23 @@ class SiswaController extends Controller
                 $simpan = $siswa->update();    
                 // dd($siswa);
                 }
+                
+               $sosmed = new Sosmed();
+               $sosmed->name = $request->twiter;
 
-                foreach ($request['nama_sosmed'] as $index => $nama) {
-                    $sosmed = new sosmed();
-                    $sosmed->siswa_id = $siswa->id;
-                    $sosmed->nama = $nama;
-                    $sosmed->link = $request['link'][$index];
-                    $sosmed->save();
+                if (is_array($request->tambahSosmed)) {
+                    // dd('here is sosmed available');
+                    foreach ($request->tambahSosmed as $tambah) 
+                                {
+                                    $sosmed = new sosmed();
+
+                                    $sosmed->siswa_id = $siswa->id;
+                                    $sosmed->nama = $tambah['nama'];
+                                    $sosmed->link = $tambah['link'];
+                                    $sosmed->save();
+                                }
                 }
-
-                    return redirect()->route('siswa')->with('success','siswa berhasil di tambahkan!');
+                    return redirect()->route('siswa.profile',['siswa'=> $siswa->id])->with('success','siswa berhasil di tambahkan!');
     }
 
     public function delete(Siswa $siswa){

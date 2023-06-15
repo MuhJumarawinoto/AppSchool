@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SosmedController;
+use App\Models\sosmed;
 use Database\Seeders\SiswaSeeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +37,15 @@ Route::match(['put', 'patch'], '/siswa/{siswa}/profile', [SiswaController::class
 Route::delete('/siswa/{siswa}',[SiswaController::class,'delete'])->name('siswa.delete');
 // Route::get('/siswa/search',[SiswaController::class,'search'])->name('siswa.search');
 
+// Route::delete('/siswa/{sosmed}/profile',[SosmedController::class,'delete'])->name('sosmed.delete');
+Route::delete('/sosmed/{sosmed}',function( $sosmed)
+        {
+            // dd($sosmed);
+            $data = Sosmed::where('id', $sosmed)->delete();
+            // dd($data);
+            // return redirect()->route('siswa.profile', $sosmed);
+            return true;
+        })->name('sosmed.delete');
 
 Auth::routes();
 
