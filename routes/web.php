@@ -54,3 +54,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//akses ke menu Guru dengan port vue  :5173
+// Route::get('/guru', [App\Http\Controllers\GuruController::class, 'index'])->name('guru');

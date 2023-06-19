@@ -3,6 +3,8 @@
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\GuruResource;
+use App\Http\Controllers\api\GuruController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::post('/api/siswa',[ApiController::class,'storage'])->name('siswa.storage');
+Route::apiResource('/guru', GuruController::class );

@@ -15,10 +15,9 @@ use Illuminate\Support\Facades\Storage;
 class SiswaController extends Controller
 {
     public function index (Request $request){
-
+        // dd(Siswa::all());
         $perPage = $request->input('per_page', 5);
         $keyword = $request->input('keyword');
-        // dd($keyword);
         $siswa = Siswa::query();
 
         if ($keyword) {
@@ -28,7 +27,7 @@ class SiswaController extends Controller
                 ->orWhere('id', 'like', "%{$keyword}%");
         }
 
-        $siswa = $siswa->paginate($perPage);
+        $siswa = $siswa->latest()->paginate($perPage);
 
         return view('siswa.index', compact('siswa', 'keyword', 'perPage'));
 
