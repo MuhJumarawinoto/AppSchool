@@ -17,7 +17,7 @@
 
   
   <li class="nav-item">
-    <a class="nav-link {{ Request::is('guru') ? '' : 'collapsed' }}" href="">
+    <a class="nav-link {{ Request::is('guru') ? '' : 'collapsed' }}" href="http://localhost:5173/">
     <i class="fa-solid fa-person-chalkboard"></i>
       <span>GURU  </span>
     </a>
